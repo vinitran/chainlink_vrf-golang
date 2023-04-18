@@ -20,16 +20,16 @@ func main() {
 	//
 	gin := api.NewGin(db)
 	gin.Run()
-	//
+
 	//trackingTx, err := event.NewEventTracking(os.Getenv("RPC"), os.Getenv("CONTRACT_ADDRESS"))
 	//if err != nil {
 	//	log.Fatal(err)
 	//}
-	//
+
 	//fromBlock, err := strconv.ParseInt(os.Getenv("FROM_BLOCK"), 10, 64)
 	//if err != nil {
 	//	log.Fatal(err)
 	//}
-	//
+
 	//trackingTx.GetEventFromBlockNumber(db, big.NewInt(fromBlock))
 }
