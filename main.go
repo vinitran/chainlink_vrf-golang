@@ -1,6 +1,8 @@
 package main
 
 import (
+	"VRFChainlink/api"
+	"VRFChainlink/database"
 	"VRFChainlink/event"
 	"github.com/joho/godotenv"
 	"log"
@@ -15,13 +17,15 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	//db, err := database.ConnectDatabase()
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	db, err := database.ConnectDatabase()
+	if err != nil {
+		log.Fatal(err)
+	}
 	//
-	//gin := api.NewGin(db)
-	//gin.Run()
+	go func() {
+		gin := api.NewGin(db)
+		gin.Run()
+	}()
 
 	trackingTx, err := event.NewEventTracking(os.Getenv("RPC"), os.Getenv("CONTRACT_ADDRESS"))
 	if err != nil {
