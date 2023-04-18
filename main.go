@@ -3,12 +3,8 @@ package main
 import (
 	"VRFChainlink/api"
 	"VRFChainlink/database"
-	"VRFChainlink/event"
 	"github.com/joho/godotenv"
 	"log"
-	"math/big"
-	"os"
-	"strconv"
 )
 
 func main() {
@@ -22,20 +18,18 @@ func main() {
 		log.Fatal(err)
 	}
 	//
-	go func() {
-		gin := api.NewGin(db)
-		gin.Run()
-	}()
-
-	trackingTx, err := event.NewEventTracking(os.Getenv("RPC"), os.Getenv("CONTRACT_ADDRESS"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fromBlock, err := strconv.ParseInt(os.Getenv("FROM_BLOCK"), 10, 64)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	trackingTx.GetEventFromBlockNumber(db, big.NewInt(fromBlock))
+	gin := api.NewGin(db)
+	gin.Run()
+	//
+	//trackingTx, err := event.NewEventTracking(os.Getenv("RPC"), os.Getenv("CONTRACT_ADDRESS"))
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//fromBlock, err := strconv.ParseInt(os.Getenv("FROM_BLOCK"), 10, 64)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//trackingTx.GetEventFromBlockNumber(db, big.NewInt(fromBlock))
 }
